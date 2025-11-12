@@ -3,8 +3,8 @@ name: Deploy Frontend (Vite → GitHub Pages)
 
 on:
   push:
-    branches: [ main ]          # main에 push/merge 시 배포
-  workflow_dispatch:            # 수동 실행도 가능
+    branches: [main] # main에 push/merge 시 배포
+  workflow_dispatch: # 수동 실행도 가능
 
 permissions:
   contents: read
@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install deps
