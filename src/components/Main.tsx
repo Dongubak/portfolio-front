@@ -3,21 +3,17 @@ import Content from "./Content";
 import Footer from "./Footer";
 
 const MainWrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
-  width: 840px;
-  gap: 58px;
+  gap: clamp(28px, 4vw, 40px);
 `;
 
 const Main = () => {
-
   return (
     <MainWrapper>
       <Content />
-      <Footer>
-        <p>Footer</p>
-      </Footer>
+      <Footer />
     </MainWrapper>
   )
 }
