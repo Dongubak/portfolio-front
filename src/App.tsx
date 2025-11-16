@@ -1,33 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import styled, { createGlobalStyle } from 'styled-components';
+import Header from './components/Header';
+import Main from './components/Main';
+
+const GlobalStyle = createGlobalStyle`
+  :root {
+    color: #0f172a;
+    font-family: 'Pretendard', 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #f3f6fb;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at top, rgba(46, 145, 255, 0.2), transparent 55%) center / cover, #0f172a;
+  }
+
+  #root {
+    isolation: isolate;
+  }
+`;
+
+const Page = styled.div`
+  min-height: 100vh;
+  padding: clamp(32px, 6vw, 90px) clamp(20px, 5vw, 80px) 120px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+`;
+
+const Layout = styled.div`
+  width: min(1040px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(32px, 4vw, 48px);
+`;
+
+const HeroSection = styled.section`
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  padding-top: clamp(60px, 12vh, 160px);
+`;
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <GlobalStyle />
+      <Page>
+        <Layout>
+          <HeroSection>
+            <Header />
+          </HeroSection>
+          <Main />
+        </Layout>
+      </Page>
     </>
   )
 }
