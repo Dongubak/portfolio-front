@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { EXPERIENCE_DOC_URL } from "../common/constants";
 
 const FooterWrapper = styled.footer<{ $visible: boolean }>`
   width: 100%;
@@ -53,16 +52,6 @@ const PrimaryButton = styled.a`
   border-radius: 999px;
   font-weight: 600;
   box-shadow: 0 12px 30px rgba(101, 109, 255, 0.4);
-`;
-
-const SecondaryButton = styled.a`
-  text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #f6f8ff;
-  padding: 12px 26px;
-  border-radius: 999px;
-  font-weight: 500;
-  background: rgba(255, 255, 255, 0.08);
 `;
 
 const Footer = () => {
