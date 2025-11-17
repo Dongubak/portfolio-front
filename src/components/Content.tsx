@@ -8,6 +8,7 @@ type SectionItem = {
   title: string;
   content: string;
   link?: string;
+  media?: string[];
 };
 
 type SectionType = {
@@ -16,7 +17,30 @@ type SectionType = {
   description?: string;
   meta?: string;
   items?: SectionItem[];
+  media?: string[];
 };
+
+const partTimeImages = [
+  `${import.meta.env.BASE_URL}img/partime1.jpg`,
+  `${import.meta.env.BASE_URL}img/partime2.jpg`,
+];
+
+const volElementaryImages = [
+  `${import.meta.env.BASE_URL}img/volunteer2.JPG`,
+];
+
+const volMiddleImages = [
+  `${import.meta.env.BASE_URL}img/volunteer1.jpeg`,
+];
+
+const hackerthonImages = [
+  `${import.meta.env.BASE_URL}img/hackerthon1.jpeg`,
+  `${import.meta.env.BASE_URL}img/hackerthon2.jpeg`,
+];
+
+const droneCodingImages = [
+  `${import.meta.env.BASE_URL}img/droncoding.jpeg`,
+];
 
 const sections: SectionType[] = [
   {
@@ -104,12 +128,14 @@ const sections: SectionType[] = [
         date: "2025.07.31",
         title: "SW 교육 봉사단 · 보조강사",
         content: "중1 학생 27명과 자율주행 자동차 제작, 센서·모터 조립 지도하며 가르치는 즐거움 체감",
+        media: volMiddleImages,
       },
       {
         date: "2025.07.24",
         title: "SW 교육 봉사단 · 보조강사",
         content:
           "대야남초 3-6학년 11명 대상 아두이노 기초·RC카 실습 운영, 배운 기술이 새싹 교육에 쓰인다는 보람을 느낌",
+        media: volElementaryImages,
       },
       {
         date: "2024.04 - 2024.12",
@@ -130,6 +156,7 @@ const sections: SectionType[] = [
     title: "아르바이트 경험",
     description:
       "고된 자동차 도장 현장에서 땀과 먼지를 견디며 끈기를 키웠고, 완벽한 마감을 위해 반복 작업을 견뎌내는 정신력을 배웠습니다.",
+    media: partTimeImages,
     items: [
       {
         date: "2023 - 2025",
@@ -167,11 +194,18 @@ const sections: SectionType[] = [
         date: "2025.10",
         title: "남원 메타모빌리티 해커톤 대회 AWS상",
         content: "AWS DeepRacer Car 활용 자율주행 시나리오 설계",
+        media: hackerthonImages,
       },
       {
         date: "2025.08",
         title: "제12회 대한민국 SW융합 해커톤 대회 우수상",
         content: "과학기술정보통신부",
+      },
+      {
+        date: "2024.10",
+        title: "META MOBILITY 드론코딩 경진대회 은상",
+        content: "국립 군산대학교·전북대학교 SW중심대학사업단",
+        media: droneCodingImages,
       },
       {
         date: "2024.12",
@@ -334,6 +368,21 @@ const Timeline = styled.div`
   gap: 22px;
 `;
 
+const MediaGrid = styled.div`
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+`;
+
+const MediaImage = styled.img`
+  width: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+  height: 180px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+`;
+
 const SectionBlock = ({
   section,
   registerRef,
@@ -380,7 +429,7 @@ const SectionBlock = ({
         {section.meta && <SectionMeta>{section.meta}</SectionMeta>}
       </SectionHeader>
       {section.description && <SectionDescription>{section.description}</SectionDescription>}
-      {section.items && (
+        {section.items && (
         <Timeline>
           {section.items.map((item) => (
             <ListItem
@@ -392,6 +441,23 @@ const SectionBlock = ({
             />
           ))}
         </Timeline>
+      )}
+      {section.items &&
+        section.items.some((item) => item.media && item.media.length) && (
+          <MediaGrid>
+            {section.items.flatMap((item) =>
+              (item.media || []).map((src, idx) => (
+                <MediaImage key={`${section.key}-${item.title}-embedded-${idx}`} src={src} alt={`${item.title} 이미지 ${idx + 1}`} />
+              ))
+            )}
+          </MediaGrid>
+        )}
+      {section.media && (
+        <MediaGrid>
+          {section.media.map((src, idx) => (
+            <MediaImage key={`${section.key}-media-${idx}`} src={src} alt={`${section.title} 이미지 ${idx + 1}`} />
+          ))}
+        </MediaGrid>
       )}
     </SectionCard>
   );
